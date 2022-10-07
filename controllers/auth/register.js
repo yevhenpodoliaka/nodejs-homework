@@ -6,7 +6,7 @@ const register = async (req, res) => {
   const { password, email, name } = req.body;
   const user = await User.findOne({ email });
   if (user) {
-    const error = new Error(`contact with email:${email} already exist`);
+    const error = new Error(`user with email:${email} already exist`);
     error.status = 409;
     throw error;
   }
