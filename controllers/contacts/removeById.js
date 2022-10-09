@@ -1,4 +1,5 @@
 const { Contact } = require("../../models");
+
 const removeById = async (req, res) => {
   const { contactId } = req.params;
    const contact = await Contact.deleteOne({ _id: contactId });

@@ -1,7 +1,5 @@
-const { User } = require("../../models");
-
 const current = async (req, res) => {
-  const { name, email } = req.user;
+  const { name, email, subscription } = req.user;
   res.json({
     status: "success",
     code: 200,
@@ -9,6 +7,7 @@ const current = async (req, res) => {
       user: {
         name,
         email,
+        subscription,
       },
     },
   });
