@@ -21,13 +21,18 @@ const contactSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    owner: {
+      type:Schema.Types.ObjectId,
+      ref: "user",
+      required:true
+    },
   },
   { versionKey: false, timestamps: true }
 );
 
 contactSchema.post("save", handleValidateSchemaErrors);
 
-const joiSchema = Joi.object({
+const joiContactSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string()
     .email({ tlds: { allow: false } })
@@ -39,18 +44,16 @@ const joiSchema = Joi.object({
   favorite: Joi.bool(),
 });
 
-const favoriteSchema = Joi.object({
+const joiFavoriteSchema = Joi.object({
   favorite: Joi.bool().required(),
 });
 
-const schemas = {
-  joiSchema,
-  favoriteSchema,
-};
+
 
 const Contact = model("contact", contactSchema);
 
 module.exports = {
   Contact,
-  schemas,
+  joiContactSchema,
+  joiFavoriteSchema,
 };
