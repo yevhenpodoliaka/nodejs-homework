@@ -24,7 +24,8 @@ const auth = async (req, res, next) => {
   } catch (error) {
      if (
        error.message === "invalid signature" ||
-       error.message === "invalid token"
+       error.message === "invalid token" ||
+       error.name === "TokenExpiredError"
      ) {
        error.status = 401;
      }
