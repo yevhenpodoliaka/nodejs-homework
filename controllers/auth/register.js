@@ -14,7 +14,7 @@ const register = async (req, res) => {
     error.status = 409;
     throw error;
   }
-  const hashedPassword =await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
   const avatarURL = gravatar.url(email);
   const verificationToken = v4();
   const newUser = await User.create({
@@ -27,7 +27,7 @@ const register = async (req, res) => {
   const mail = {
     to: email,
     subject: "Site registration confirmation",
-    html: `<a href="${HOST}/api/users/verify/${verificationToken}" target="_blank">Click to confirm email</a>`,
+    html: `<a href="${HOST}/api/auth/verify/${verificationToken}" target="_blank">Click to confirm email</a>`,
   };
   await mailSender(mail);
   res.status(201).json({
